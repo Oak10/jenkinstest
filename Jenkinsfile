@@ -28,7 +28,7 @@ pipeline {
             steps {
                 checkout([
                     $class: 'GitSCM', 
-                    branches: [[name: '*/main']], 
+                    branches: [[name: '*/${BRANCH_NAME}']], 
                     userRemoteConfigs: [[url: 'https://github.com/spring-projects/spring-petclinic.git']]
                 ])
             }
@@ -51,9 +51,6 @@ pipeline {
         }
 
         stage('Build Deploy Code') {
-            when {
-                branch 'develop'
-            }
             steps {
                 sh """
                 echo "Building Artifact"
